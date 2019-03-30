@@ -1,0 +1,4 @@
+*.pyc
+*.sql
+/venv
+/__pycache__

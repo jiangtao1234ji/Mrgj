@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% import "pages.html" as paginator %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="navbar-header" style="margin-top:50px">
+            <a style="display: inline-block; font-size: x-large;
+         margin: 5px 5px; color: #1b6d85;" href="{{ url_for("index", page=1) }}"> 所有分类</a>
+            {% for item in mrgj_tags %}
+                <a style="display: inline-block; font-size: large; margin: 5px 5px; color: #1b6d85;"
+                   href="{{ url_for("index", page=1, tag=item.id) }}">
+                    {{ item.name }}
+                </a>
+            {% endfor %}
+
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-md-12 col-md-12">
+                <p class="pull-right visible-xs">
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+                </p>
+
+                <div class="jumbotronz">
+                    <h2 style="text-align: center">南京名人故居一览</h2>
+                </div>
+
+                <div class="row">
+                    {% for item in  mrgjs.items %}
+                        <div class="col-md-offset-0">
+                            <div class="row">
+                                <h2>{{ item.name }}</h2>
+                                <!--<div class="col-sm-6">-->
+                                <!--<img src="./timg.jpeg" class="img-responsive" alt="Responsive image">-->
+                                <!--</div>-->
+
+                                <!--<div class="col-sm-8">-->
+                                <!--Level 2: .col-xs-4 .col-sm-6-->
+                                <!--</div>-->
+                            </div>
+                            <div class="row">
+                                <p>{{ item.desc }}</p>
+                                <p><a class="btn btn-default"
+                                      href="{{ item.href }}"
+                                      role="button">View details &raquo;</a></p>
+                            </div>
+                        </div><!--/.col-xs-6.col-lg-4-->
+                    {% endfor %}
+                </div><!--/row-->
+
+            </div><!--/.col-xs-12.col-sm-9-->
+        </div><!--/row-->
+
+
+        <hr>
+
+        <footer>
+            <p>&copy; Company 2019</p>
+        </footer>
+    </div><!--/.container-->
+
+    <div class="col-md-12 text-center">
+        {{ paginator.paginate(mrgjs,"list") }}
+    </div>
+{% endblock %}
